@@ -8,12 +8,12 @@ RUN apt update && apt install -y \
 WORKDIR /root
 
 # Set HBase environment
-ENV HBASE_VERSION 1.2.7
+ENV HBASE_VERSION 1.2.8
 ENV HBASE_HOME=/root/hbase-${HBASE_VERSION}
 
 # Get the Hbase binary and checksum files
-RUN wget -nv http://apache.mirrors.ovh.net/ftp.apache.org/dist/hbase/${HBASE_VERSION}/hbase-${HBASE_VERSION}-bin.tar.gz
-RUN wget http://archive.apache.org/dist/hbase/${HBASE_VERSION}/hbase-${HBASE_VERSION}-bin.tar.gz.sha512
+RUN wget -nv http://apache.mirrors.ovh.net/ftp.apache.org/dist/hbase/hbase-${HBASE_VERSION}/hbase-${HBASE_VERSION}-bin.tar.gz
+RUN wget http://archive.apache.org/dist/hbase/hbase-${HBASE_VERSION}/hbase-${HBASE_VERSION}-bin.tar.gz.sha512
 
 # Validate the binary
 RUN \
