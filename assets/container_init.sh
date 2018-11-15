@@ -14,14 +14,14 @@ done
 
 cat /etc/hbase/hosts > /etc/hosts;
 [[ ! -z $IS_MASTER ]] && \
-  (bash $HBASE_HOME/bin/start-hbase.sh && \
-  bash $HBASE_HOME/bin/hbase-daemon.sh start rest \
+  (bash "${HBASE_HOME}/bin/start-hbase.sh" && \
+  bash "${HBASE_HOME}/bin/hbase-daemon.sh" start rest \
   || exit 1)
-[[ -z $IS_MASTER ]] && (bash $HBASE_HOME/bin/hbase-daemon.sh start regionserver || exit 1)
-tail -f $HBASE_HOME/logs/* &
+[[ -z "${IS_MASTER}" ]] && (bash "${HBASE_HOME}/bin/hbase-daemon.sh" start regionserver || exit 1)
+tail -f ${HBASE_HOME}/logs/* &
 while true
 do
-  if [ ! -z $IS_MASTER ]
+  if [ ! -z "${IS_MASTER}" ]
   then
     ps ax | grep "foreground_start master" | grep -v "grep" > /dev/null
     if [ $? -ne 0 ]
