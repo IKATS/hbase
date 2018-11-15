@@ -62,11 +62,6 @@ cat >> "${HBASE_HOME}/conf/hbase-site.xml" << EOF
   <value>16030</value>
 </property>
 
-<property>
-  <name>hbase.regionserver.hostname.disable.master.reversedns</name>
-  <value>true</value>
-</property>
-
 $REGION_HOSTNAME
 
 <property>
