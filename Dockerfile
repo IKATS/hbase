@@ -1,4 +1,4 @@
-FROM openjdk:7-jre-slim
+FROM openjdk:8-jre-slim
 
 RUN apt update && apt install -y \
   wget \
@@ -12,7 +12,7 @@ ENV HBASE_VERSION 2.0.2
 ENV HBASE_HOME=/root/hbase-${HBASE_VERSION}
 
 # Get the Hbase binary and checksum files
-RUN wget -nv http://apache.mirrors.ovh.net/ftp.apache.org/dist/hbase/${HBASE_VERSION}/hbase-${HBASE_VERSION}-bin.tar.gz 
+RUN wget -nv http://apache.mirrors.ovh.net/ftp.apache.org/dist/hbase/${HBASE_VERSION}/hbase-${HBASE_VERSION}-bin.tar.gz
 RUN wget https://apache.org/dist/hbase/${HBASE_VERSION}/hbase-${HBASE_VERSION}-bin.tar.gz.sha512
 
 # Validate the binary
