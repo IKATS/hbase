@@ -3,7 +3,8 @@ FROM openjdk:8-jre-slim
 RUN apt update && apt install -y \
   wget \
   openssh-client \
-  openssh-server
+  openssh-server \
+  gnupg
 
 WORKDIR /root
 
