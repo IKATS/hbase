@@ -1,5 +1,11 @@
 FROM openjdk:8-jre-slim
 
+LABEL license="Apache License, Version 2.0"
+LABEL copyright="CS Systèmes d'Information"
+LABEL maintainer="contact@ikats.org"
+LABEL version="0.12.0"
+
+
 RUN apt update && apt install -y \
   wget \
   openssh-client \
@@ -35,6 +41,7 @@ RUN \
 # Put IKATS dedicated script for starting
 COPY assets/ssh_config ./.ssh/config
 COPY assets/container_init.sh .
+COPY assets/hbase-site-docker.xml ./hbase-site.xml
 COPY assets/inject_configuration.sh .
 
 EXPOSE 60000 60010
