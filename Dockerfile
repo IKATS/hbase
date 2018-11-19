@@ -5,12 +5,14 @@ LABEL copyright="CS Systèmes d'Information"
 LABEL maintainer="contact@ikats.org"
 LABEL version="0.12.0"
 
-
-RUN apt update && apt install -y \
-  wget \
-  openssh-client \
-  openssh-server \
-  gnupg
+RUN apt-get update \
+  && apt-get upgrade -y \
+  && apt-get install -y \
+    wget \
+    openssh-client \
+    openssh-server \
+    gnupg \
+  && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /root
 
@@ -41,8 +43,23 @@ RUN \
 # Put IKATS dedicated script for starting
 COPY assets/ssh_config ./.ssh/config
 COPY assets/container_init.sh .
-COPY assets/hbase-site-docker.xml ./hbase-site.xml
+COPY assets/hbase-site-template.xml .
+COPY assets/zoo-template.cfg .
 COPY assets/inject_configuration.sh .
 
-EXPOSE 60000 60010
+RUN mkdir -p /data/hbase
+
+# REST API
+EXPOSE 8080
+# REST Web UI at :8085/rest.jsp
+EXPOSE 8085
+# Thrift API
+EXPOSE 9090
+# Thrift Web UI at :9095/thrift.jsp
+EXPOSE 9095
+# HBase's Embedded zookeeper cluster
+EXPOSE 2181
+# HBase Master web UI at :16010/master-status;  ZK at :16010/zk.jsp
+EXPOSE 16010
+
 CMD bash container_init.sh

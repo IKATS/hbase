@@ -2,7 +2,9 @@
 
 set -xe
 
-if "${CLUSTER_MODE:-false}"
+CLUSTER_MODE=${CLUSTER_MODE:-true}
+
+if "${CLUSTER_MODE}"
 then
 
   bash inject_configuration.sh
@@ -56,8 +58,10 @@ then
 
 else
   echo "docker-compose mode"
-  envsubst < /root/hbase-site-template.xml > "${HBASE_HOME}/conf/hbase-site.xml"
-  envsubst < /root/zoo-template.cfg > "${HBASE_HOME}/conf/zoo.cfg"
+
+  sed "s/\${HOSTNAME}/$HOSTNAME/g" /root/hbase-site-template.xml > "${HBASE_HOME}/conf/hbase-site.xml"
+  sed "s/\${HOSTNAME}/$HOSTNAME/g" /root/zoo-template.cfg > "${HBASE_HOME}/conf/zoo.cfg"
+
   "${HBASE_HOME}/bin/hbase" thrift start &
   "${HBASE_HOME}/bin/hbase" rest start &
   "${HBASE_HOME}/bin/hbase" master start &
