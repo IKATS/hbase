@@ -8,10 +8,10 @@ if "${CLUSTER_MODE}"
 then
 
   bash inject_configuration.sh
-  echo "Waiting for service discovery to kick in before starting HBase"
+  echo "Waiting for HBase hosts peers to kick in by hbase operator before starting that HBase instance"
   while [ "$(wc -l /etc/hbase/hosts | head -n 1 | cut -d ' ' -f1)" -eq "0" ]
   do
-    echo "Could not discover services, waiting."
+    echo "Could not discover hosts peers, waiting."
     sleep 5
   done
 
