@@ -6,7 +6,7 @@ CLUSTER_MODE=${CLUSTER_MODE:-true}
 
 if "${CLUSTER_MODE}"
 then
-
+  export HBASE_MANAGES_ZK="false"
   bash inject_configuration.sh
   echo "Waiting for HBase hosts peers to kick in by hbase operator before starting that HBase instance"
   while [ "$(wc -l /etc/hbase/hosts | head -n 1 | cut -d ' ' -f1)" -eq "0" ]
@@ -55,8 +55,8 @@ then
     cat /etc/hbase/hosts > /etc/hosts;
     sleep 10
   done
-
 else
+  export HBASE_MANAGES_ZK="true"
   echo "docker-compose mode"
 
   sed "s/\${HOSTNAME}/$HOSTNAME/g" /root/hbase-site-template.xml > "${HBASE_HOME}/conf/hbase-site.xml"
