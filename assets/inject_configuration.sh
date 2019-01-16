@@ -81,7 +81,7 @@ $REGION_HOSTNAME
 
 <property>
   <name>dfs.replication</name>
-  <value>1</value>
+  <value>${REPLICATION_FACTOR-3}</value>
 </property>
 
 <property>
