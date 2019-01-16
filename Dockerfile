@@ -37,8 +37,7 @@ RUN \
 RUN \
   sed "s:# export JAVA_HOME=.*:export JAVA_HOME=$JAVA_HOME:" hbase-${HBASE_VERSION}/conf/hbase-env.sh -i && \
   echo "export HBASE_HOME=${HBASE_HOME}" >> ~/.bashrc && \
-  echo "export PATH=$PATH:${HBASE_HOME}" >> ~/.bashrc && \
-  echo "export HBASE_MANAGES_ZK=false" >> ~/.bashrc
+  echo "export PATH=$PATH:${HBASE_HOME}" >> ~/.bashrc
 
 # Put IKATS dedicated script for starting
 COPY assets/ssh_config ./.ssh/config
