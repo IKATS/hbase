@@ -5,6 +5,8 @@ LABEL copyright="CS Systèmes d'Information"
 LABEL maintainer="contact@ikats.org"
 LABEL version="0.12.0"
 
+VOLUME /var/zookeeper
+
 RUN apt-get update \
   && apt-get upgrade -y \
   && apt-get install -y \
