@@ -3,7 +3,7 @@ FROM openjdk:8-jre-slim
 LABEL license="Apache License, Version 2.0"
 LABEL copyright="CS Systèmes d'Information"
 LABEL maintainer="contact@ikats.org"
-LABEL version="0.12.0"
+LABEL version="0.1.0"
 
 VOLUME /var/zookeeper
 
